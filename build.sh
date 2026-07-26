@@ -6,6 +6,7 @@ if [ -f resume.pdf ]; then
 elif [ -f resume.pdf.b64 ]; then
   base64 -d resume.pdf.b64 > public/resume.pdf
 fi
+cp public/resume.pdf public/Harshit_Arora_Resume.pdf
 if [ -f profile.jpg ]; then
   cp profile.jpg public/
 else
