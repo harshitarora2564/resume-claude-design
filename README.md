@@ -25,6 +25,6 @@ Replace `resume.pdf` with a new file of the same name.
 
 ## Deployment
 
-**GitHub Pages:** Settings → Pages → Deploy from a branch → select the branch and `/ (root)`.
+**Vercel (current setup):** the project `resume-claude-design` deploys with build command `sh build.sh` and output directory `public`. The script copies `index.html` and `resume.pdf` into `public/` and fetches `profile.jpg` from the old hosted site if no local copy exists. Once the repo is connected to the Vercel project (Vercel dashboard → Settings → Git), every commit to the production branch auto-deploys.
 
-**Vercel:** import the repo, no framework preset, no build command needed.
+**GitHub Pages (alternative):** Settings → Pages → Deploy from a branch → select the branch and `/ (root)`. Pages ignores `build.sh` and serves `index.html` directly, which also works.
