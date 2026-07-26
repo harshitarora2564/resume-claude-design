@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harshit Arora — Marketing, SEO &amp; AI Content | Delhi NCR</title>
+<meta name="description" content="Harshit Arora — marketing graduate specialising in SEO, AEO and AI-driven content for brands in Delhi NCR and beyond.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231E4633'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-family='Georgia, serif' font-size='34' fill='%23F4F1EA'%3EHA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F4F1EA;
+    --cream-2: #EEEAE0;
+    --ink: #17201B;
+    --green: #1E4633;
+    --green-line: #3A5E4A;
+    --sage: #9DB5A4;
+    --chip: #D7DFD3;
+    --body: #4A5248;
+    --muted: #6B7268;
+    --hairline: #DED8CA;
+    --stat-line: #CFC9BA;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    font-family: 'Archivo', sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--green); text-decoration: none; }
+  ::selection { background: var(--green); color: var(--cream); }
+  em.accent {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--green);
+  }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h2 {
+    margin: 0;
+    font-size: clamp(32px, 3.4vw, 48px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 15px 32px;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, opacity 0.2s;
+  }
+  .btn-green { background: var(--green); color: var(--cream); }
+  .btn-green:hover { background: var(--ink); color: var(--cream); }
+  .btn-outline { border: 1px solid #B9B3A4; color: var(--ink); }
+  .btn-outline:hover { border-color: var(--green); color: var(--green); }
+  .btn-cream { background: var(--cream); color: var(--ink); }
+  .btn-cream:hover { opacity: 0.85; }
+  .btn-outline-dark { border: 1px solid var(--green-line); color: var(--chip); }
+  .btn-outline-dark:hover { border-color: var(--sage); color: var(--cream); }
+
+  /* Nav */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(244, 241, 234, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 40px;
+  }
+  .wordmark { font-weight: 600; font-size: 17px; letter-spacing: 0.02em; color: var(--ink); }
+  .nav-links { display: flex; align-items: center; gap: 32px; font-size: 14px; font-weight: 500; }
+  .nav-links a { color: var(--body); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--green); }
+  .btn-nav { font-size: 13px; letter-spacing: 0.04em; padding: 11px 22px; }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 72px;
+    align-items: center;
+    padding-top: 96px;
+    padding-bottom: 110px;
+  }
+  .hero-left { display: flex; flex-direction: column; gap: 32px; }
+  .hero-tags { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--green);
+    border: 1px solid #B9C4B4;
+    border-radius: 999px;
+    padding: 6px 14px;
+  }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #2E7D4F; display: inline-block; }
+  h1 {
+    margin: 0;
+    font-size: clamp(44px, 5.4vw, 78px);
+    line-height: 1.04;
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .hero-sub { margin: 0; max-width: 520px; font-size: 17px; line-height: 1.65; color: var(--body); }
+  .hero-ctas { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .hero-right { display: flex; justify-content: center; }
+  .portrait-frame { width: min(380px, 100%); aspect-ratio: 4 / 5; position: relative; }
+  .portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: inset(0 round 220px 220px 20px 20px);
+    display: block;
+  }
+
+  /* Profile */
+  .profile-band { border-top: 1px solid var(--hairline); background: var(--cream-2); }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 64px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .section-head { display: flex; flex-direction: column; gap: 20px; }
+  .profile-body { display: flex; flex-direction: column; gap: 36px; }
+  .profile-body > p { margin: 0; font-size: 18px; line-height: 1.7; color: #333B33; text-wrap: pretty; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--stat-line);
+    border: 1px solid var(--stat-line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .stat { background: var(--cream); padding: 26px 24px; display: flex; flex-direction: column; gap: 6px; }
+  .stat-num { font-size: 34px; font-weight: 300; letter-spacing: -0.02em; }
+  .stat-cap { font-size: 13px; color: var(--muted); line-height: 1.45; }
+
+  /* Experience */
+  .experience { padding-top: 100px; padding-bottom: 60px; }
+  .experience-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+  .experience-range { font-size: 14px; color: var(--muted); }
+  .role {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 48px;
+    padding: 44px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .role-org { display: flex; flex-direction: column; gap: 8px; }
+  .role-org-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .role-dates { font-size: 13px; color: var(--muted); }
+  .role-detail { display: flex; flex-direction: column; gap: 18px; }
+  .role-detail h3 { margin: 0; font-size: 26px; font-weight: 400; letter-spacing: -0.01em; }
+  .role-detail ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--body);
+  }
+  .role-detail li { display: flex; gap: 12px; }
+  .role-detail li::before { content: "—"; color: var(--green); flex-shrink: 0; }
+
+  /* Skills */
+  .skills-band { border-top: 1px solid var(--hairline); background: var(--green); }
+  .skills-inner { display: flex; flex-direction: column; gap: 56px; padding-top: 100px; padding-bottom: 100px; }
+  .skills-band .eyebrow { color: var(--sage); }
+  .skills-band h2 { color: var(--cream); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .skill-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 1px solid var(--green-line);
+    padding-top: 24px;
+  }
+  .skill-col h3 { margin: 0; font-size: 17px; font-weight: 500; color: var(--cream); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 13px;
+    color: var(--chip);
+    border: 1px solid var(--green-line);
+    border-radius: 999px;
+    padding: 7px 14px;
+  }
+
+  /* Education & Certifications */
+  .education {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .education h2 { font-size: clamp(28px, 2.6vw, 38px); }
+  .edu-col { display: flex; flex-direction: column; gap: 40px; }
+  .edu-rows { display: flex; flex-direction: column; }
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .edu-row:last-child { border-bottom: 1px solid var(--hairline); }
+  .edu-main { display: flex; flex-direction: column; gap: 4px; }
+  .edu-title { font-size: 16px; font-weight: 500; }
+  .edu-place { font-size: 14px; color: var(--muted); }
+  .edu-side { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; flex-shrink: 0; }
+  .edu-score { font-size: 14px; color: var(--green); font-weight: 500; }
+  .edu-year { font-size: 13px; color: var(--muted); }
+  .cert-name { font-size: 15px; font-weight: 500; }
+  .cert-issuer { font-size: 13px; color: var(--muted); flex-shrink: 0; }
+
+  /* Contact */
+  .contact-band { background: var(--ink); }
+  .contact-inner { display: flex; flex-direction: column; gap: 64px; padding-top: 120px; padding-bottom: 80px; }
+  .contact-band .eyebrow { color: var(--sage); }
+  .contact-copy { display: flex; flex-direction: column; gap: 28px; max-width: 760px; }
+  .contact-copy h2 {
+    font-size: clamp(40px, 4.6vw, 64px);
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+    color: var(--cream);
+  }
+  .contact-copy h2 em.accent { color: var(--sage); }
+  .contact-copy p { margin: 0; font-size: 16px; line-height: 1.65; color: #A8AFA3; max-width: 480px; }
+  .contact-ctas { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-top: 32px;
+    border-top: 1px solid #2A362C;
+    flex-wrap: wrap;
+  }
+  .footer span { font-size: 13px; color: var(--muted); }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .container { padding: 0 24px; }
+    .nav-inner { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 64px; padding-bottom: 72px; }
+    .profile-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 64px; padding-bottom: 64px; }
+    .experience { padding-top: 64px; padding-bottom: 40px; }
+    .role { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+    .skills-inner { padding-top: 64px; padding-bottom: 64px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .education { grid-template-columns: 1fr; gap: 56px; padding-top: 64px; padding-bottom: 64px; }
+    .contact-inner { padding-top: 80px; padding-bottom: 56px; }
+  }
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="wordmark">Harshit Arora<span style="color: var(--green)">.</span></a>
+    <div class="nav-links">
+      <a href="#about">Profile</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="resume.pdf" download="Harshit_Arora_Resume.pdf" class="btn btn-green btn-nav">Download Resume</a>
+  </div>
+</nav>
+
+<header id="top" class="container hero">
+  <div class="hero-left">
+    <div class="hero-tags">
+      <span class="eyebrow">Marketing · SEO · AI Content — Delhi NCR</span>
+      <span class="badge"><span class="badge-dot"></span>Open to marketing roles</span>
+    </div>
+    <h1>Marketing, SEO &amp; AI-driven content, grounded in how businesses <em class="accent">actually sell</em>.</h1>
+    <p class="hero-sub">I’m Harshit Arora — a marketing graduate turning curiosity and structured thinking into SEO, AEO and AI-driven content for brands in Delhi NCR and beyond.</p>
+    <div class="hero-ctas">
+      <a href="mailto:aroraharshit2564@gmail.com" class="btn btn-green">Email me</a>
+      <a href="https://www.linkedin.com/in/harshitarora7" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="portrait-frame">
+      <img src="profile.jpg" onerror="this.onerror=null;this.src='https://harshitlive.lovable.app/profile.jpg'" alt="Portrait of Harshit Arora">
+    </div>
+  </div>
+</header>
+
+<section id="about" class="profile-band">
+  <div class="container profile-grid">
+    <div class="section-head">
+      <span class="eyebrow">01 — Profile</span>
+      <h2>Range, <em class="accent">by design</em>.</h2>
+    </div>
+    <div class="profile-body">
+      <p>B.Com (Hons) from JIMS Kalkaji, building a career in digital marketing, content strategy and brand communication. I’ve sold B2B hardware on the ground, run social media for college societies, and shipped SEO and AI-driven content inside healthcare marketing. Different worlds — deliberately. You understand marketing better when you’ve seen how businesses actually sell, not just how they communicate.</p>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-num">9.3</span>
+          <span class="stat-cap">CGPA — B.Com (Hons), JIMS Kalkaji</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-cap">Industries — healthcare, B2B trade, campus media</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">5</span>
+          <span class="stat-cap">Certifications — Google AI, NISM, Moz SEO &amp; more</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="container experience">
+  <div class="experience-head">
+    <div class="section-head">
+      <span class="eyebrow">02 — Experience</span>
+      <h2>Where I’ve worked</h2>
+    </div>
+    <span class="experience-range">2021 — 2026</span>
+  </div>
+
+  <div class="role">
+    <div class="role-org">
+      <span class="role-org-name">Max Healthcare</span>
+      <span class="role-dates">Feb 2026 — May 2026</span>
+    </div>
+    <div class="role-detail">
+      <h3>Industrial Trainee — Marketing</h3>
+      <ul>
+        <li>Produced SEO- and AEO-optimised content with prompt engineering for diagnostic-test and hospital topics, within Max Healthcare’s content framework.</li>
+        <li>Built scalable content and automation workflows with Claude Skills, Custom GPTs and AI-based video production — from generation to QA and performance analysis.</li>
+        <li>Supported SEO strategy execution, Google Ads fundamentals and competitive benchmarking across healthcare digital marketing.</li>
+        <li>Generated AI-assisted performance reports and backtested WhatsApp bot flows for conversational accuracy.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="role">
+    <div class="role-org">
+      <span class="role-org-name">Bajrang Industrial Hardware</span>
+      <span class="role-dates">Apr 2025 — Jul 2025 · Faridabad</span>
+    </div>
+    <div class="role-detail">
+      <h3>Sales &amp; Marketing Associate</h3>
+      <ul>
+        <li>Acquired and served B2B clients, coordinating wholesale sales of industrial hardware.</li>
+        <li>Supported marketing efforts to build brand visibility and customer retention on the ground.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="role">
+    <div class="role-org">
+      <span class="role-org-name">CMR Green Technologies</span>
+      <span class="role-dates">May 2022 — Jul 2022 · Faridabad</span>
+    </div>
+    <div class="role-detail">
+      <h3>Finance &amp; Taxation Intern</h3>
+      <ul>
+        <li>Reconciled Form 26AS, AIS and TIS; worked on TDS/TCS returns (26Q, 27EQ) and Form 15CA for three entities.</li>
+        <li>Reviewed payables, flagged 90+ day unsettled advances, and supported Section 80JJA analysis for manufacturing entities.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="role">
+    <div class="role-org">
+      <span class="role-org-name">JIMS Kalkaji — Campus Media</span>
+      <span class="role-dates">Feb 2021 — Jun 2023</span>
+    </div>
+    <div class="role-detail">
+      <h3>Social Media Manager</h3>
+      <ul>
+        <li>Ran the official LinkedIn presence for Pixellence (photography society) and Communicon — posting, engagement and community.</li>
+        <li>Managed the institute’s official Twitter handle for seven months.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="skills-band">
+  <div class="container skills-inner">
+    <div class="section-head">
+      <span class="eyebrow">03 — Skills</span>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-col">
+        <h3>Digital Marketing &amp; SEO</h3>
+        <div class="chips">
+          <span class="chip">Technical SEO</span>
+          <span class="chip">GEO &amp; AEO Blogs</span>
+          <span class="chip">Content Strategy</span>
+          <span class="chip">E-E-A-T</span>
+          <span class="chip">Keyword Research</span>
+          <span class="chip">Search Console</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>AI &amp; Automation</h3>
+        <div class="chips">
+          <span class="chip">Prompt Engineering</span>
+          <span class="chip">LLM Content Production</span>
+          <span class="chip">AI Workflow Design</span>
+          <span class="chip">AI Video Production</span>
+          <span class="chip">Claude Skills &amp; Custom GPTs</span>
+          <span class="chip">Google AI Studio</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Core Competencies</h3>
+        <div class="chips">
+          <span class="chip">Analytical Thinking</span>
+          <span class="chip">Strategy &amp; Planning</span>
+          <span class="chip">Team Leadership</span>
+          <span class="chip">AI-Assisted Automation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="container education">
+  <div class="edu-col">
+    <div class="section-head">
+      <span class="eyebrow">04 — Education</span>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-rows">
+      <div class="edu-row">
+        <div class="edu-main">
+          <span class="edu-title">B.Com (Hons)</span>
+          <span class="edu-place">JIMS Kalkaji, New Delhi</span>
+        </div>
+        <div class="edu-side">
+          <span class="edu-score">CGPA 9.3</span>
+          <span class="edu-year">2023</span>
+        </div>
+      </div>
+      <div class="edu-row">
+        <div class="edu-main">
+          <span class="edu-title">CBSE Class 12</span>
+          <span class="edu-place">Delhi Public School, Faridabad</span>
+        </div>
+        <div class="edu-side">
+          <span class="edu-score">80%</span>
+          <span class="edu-year">2020</span>
+        </div>
+      </div>
+      <div class="edu-row">
+        <div class="edu-main">
+          <span class="edu-title">CBSE Class 10</span>
+          <span class="edu-place">Delhi Public School, Faridabad</span>
+        </div>
+        <div class="edu-side">
+          <span class="edu-score">85%</span>
+          <span class="edu-year">2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="edu-col">
+    <div class="section-head">
+      <span class="eyebrow">05 — Certifications</span>
+      <h2>Certifications</h2>
+    </div>
+    <div class="edu-rows">
+      <div class="edu-row">
+        <span class="cert-name">Google AI Professional Certifications</span>
+        <span class="cert-issuer">Google · 2026</span>
+      </div>
+      <div class="edu-row">
+        <span class="cert-name">SEO Professional Certification by Moz</span>
+        <span class="cert-issuer">LinkedIn Learning · 2026</span>
+      </div>
+      <div class="edu-row">
+        <span class="cert-name">NISM Series V-A Mutual Fund Distributors</span>
+        <span class="cert-issuer">NISM · 2023</span>
+      </div>
+      <div class="edu-row">
+        <span class="cert-name">Zerodha Varsity Stock Market Basics</span>
+        <span class="cert-issuer">Zerodha · 2022</span>
+      </div>
+      <div class="edu-row">
+        <span class="cert-name">Financial Markets</span>
+        <span class="cert-issuer">Yale University · 2021</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-band">
+  <div class="container contact-inner">
+    <div class="contact-copy">
+      <span class="eyebrow">06 — Contact</span>
+      <h2>Let’s build marketing that <em class="accent">actually works</em>.</h2>
+      <p>Based in Faridabad, Delhi NCR. Open to marketing, SEO and AI-content roles — or just a good conversation.</p>
+      <div class="contact-ctas">
+        <a href="mailto:aroraharshit2564@gmail.com" class="btn btn-cream">aroraharshit2564@gmail.com</a>
+        <a href="https://www.linkedin.com/in/harshitarora7" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">LinkedIn ↗</a>
+        <a href="resume.pdf" download="Harshit_Arora_Resume.pdf" class="btn btn-outline-dark">Resume (PDF)</a>
+      </div>
+    </div>
+    <div class="footer">
+      <span>© 2026 Harshit Arora</span>
+      <span>Marketing · SEO · AI Content — Delhi NCR</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
