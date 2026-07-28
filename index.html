@@ -401,6 +401,45 @@
     .portrait-frame img { transform: none !important; }
     .btn:hover, .role:hover .role-detail h3, .chip:hover { transform: none !important; }
   }
+
+  /* ---------- Scroll-lit text (per-character, driven by one custom property) ---------- */
+  html.js .lit .ch {
+    opacity: calc(.22 + .78 * clamp(0, calc(var(--lit, 0) - var(--i)), 1));
+  }
+
+  /* ---------- Magnetic hover ---------- */
+  .magnetic { transition: transform .6s ease-in-out; will-change: transform; }
+  .magnetic.pulling { transition: transform .3s ease-out; }
+
+  /* ---------- Layered panels: rounded tops that overlap the section above ---------- */
+  .skills-band {
+    border-top: none;
+    border-radius: 44px 44px 0 0;
+    position: relative; z-index: 2;
+  }
+  .contact-band {
+    border-radius: 44px 44px 0 0;
+    margin-top: -44px;
+    position: relative; z-index: 3;
+  }
+  .contact-inner { padding-top: 150px; }
+  @media (max-width: 640px) {
+    .skills-band, .contact-band { border-radius: 30px 30px 0 0; }
+    .contact-band { margin-top: -30px; }
+    .contact-inner { padding-top: 104px; }
+  }
+
+  /* ---------- Gradient heading on the dark band ---------- */
+  .skills-band h2 {
+    background: linear-gradient(180deg, #F4F1EA 0%, #9DB5A4 125%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.js .lit .ch { opacity: 1 !important; }
+    .magnetic { transition: none !important; transform: none !important; }
+  }
 </style>
 
 <script type="application/ld+json">
@@ -465,7 +504,7 @@
 </head>
 <body>
 <div class="intro" id="intro" aria-hidden="true">
-  <div class="intro-inner"><span class="intro-word"><span class="iw">harshit<span class="idot">.</span>arora</span></span></div>
+  <div class="intro-inner"><span class="intro-word"><span class="iw">Harshit<span class="idot">.</span>Arora</span></span></div>
   <div class="intro-meta">
     <span class="intro-label">Marketing · SEO · AI Content</span>
     <span class="intro-count" id="introCount">0</span>
@@ -476,7 +515,7 @@
 
 <nav class="nav">
   <div class="container nav-inner">
-    <a href="#top" class="wordmark">harshit<span style="color: var(--green)">.</span>arora</a>
+    <a href="#top" class="wordmark">Harshit<span style="color: var(--green)">.</span>Arora</a>
     <div class="nav-links">
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
@@ -757,6 +796,7 @@
   var frame = $(".portrait-frame");
   var portrait = frame ? $("img", frame) : null;
   var ticking = false;
+  var litEls = [];
 
   function update() {
     ticking = false;
@@ -777,8 +817,70 @@
         portrait.style.transform = "translate3d(0," + ((p - 0.5) * -34).toFixed(2) + "px,0) scale(1.08)";
       }
     }
+
+    if (litEls && litEls.length && !reduce) {
+      var vh = window.innerHeight, rects = [];
+      for (var i = 0; i < litEls.length; i++) rects.push(litEls[i].getBoundingClientRect()); // read
+      for (var j = 0; j < litEls.length; j++) {                                              // then write
+        var rc = rects[j];
+        // starts as the element enters at 95% of the viewport, completes once its
+        // top reaches 60% — so blocks near the end of the document still finish
+        var prog = (vh * 0.95 - rc.top) / (vh * 0.35);
+        prog = prog < 0 ? 0 : prog > 1 ? 1 : prog;
+        var v = Math.round(prog * (litEls[j].__chars + 6));
+        if (v !== litEls[j].__lit) {            // only touch the DOM when it changes
+          litEls[j].__lit = v;
+          litEls[j].style.setProperty("--lit", v);
+        }
+      }
+    }
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+  /* ---------- 5. scroll-lit text ---------- */
+  litEls = $$(".experience-head h2, .skills-inner h2, .contact-copy p");
+  litEls.forEach(function (el) {
+    el.classList.add("lit");
+    var nodes = [], tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+    while (tw.nextNode()) nodes.push(tw.currentNode);
+    var i = 0;
+    nodes.forEach(function (node) {
+      var frag = document.createDocumentFragment();
+      node.nodeValue.split("").forEach(function (ch) {
+        if (ch === " " || ch === "\n") { frag.appendChild(document.createTextNode(ch)); i++; return; }
+        var s = document.createElement("span");
+        s.className = "ch";
+        s.style.setProperty("--i", i++);
+        s.textContent = ch;
+        frag.appendChild(s);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+    el.__chars = i;
+  });
+
+  /* ---------- 6. magnetic hover (pointer devices only) ---------- */
+  var canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (canHover && !reduce) {
+    [[frame, 7, 110], [$(".btn-nav"), 4, 60]].forEach(function (cfg) {
+      var el = cfg[0], strength = cfg[1], pad = cfg[2];
+      if (!el) return;
+      el.classList.add("magnetic");
+      window.addEventListener("mousemove", function (e) {
+        var r = el.getBoundingClientRect();
+        if (!r.width) return;
+        var dx = e.clientX - (r.left + r.width / 2);
+        var dy = e.clientY - (r.top + r.height / 2);
+        if (Math.abs(dx) < r.width / 2 + pad && Math.abs(dy) < r.height / 2 + pad) {
+          el.classList.add("pulling");
+          el.style.transform = "translate3d(" + (dx / strength).toFixed(1) + "px," + (dy / strength).toFixed(1) + "px,0)";
+        } else if (el.classList.contains("pulling")) {
+          el.classList.remove("pulling");
+          el.style.transform = "translate3d(0,0,0)";
+        }
+      }, { passive: true });
+    });
+  }
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
