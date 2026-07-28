@@ -1,0 +1,66 @@
+# Harshit Arora
+
+> Marketing, SEO and AI-content specialist based in Faridabad, Delhi NCR, India.
+> B.Com (Hons) from JIMS Kalkaji (CGPA 9.3). Works at the intersection of technical
+> SEO, GEO/AEO content and AI-driven content production workflows.
+> Currently open to marketing, SEO and AI-content roles.
+
+## Summary
+
+Harshit Arora is a marketing graduate building a career in digital marketing, content
+strategy and brand communication. His experience deliberately spans three different
+worlds — healthcare marketing, B2B industrial sales, and campus media — on the premise
+that you understand marketing better once you have seen how businesses actually sell,
+not only how they communicate.
+
+## Contact
+
+- Email: aroraharshit2564@gmail.com
+- LinkedIn: https://www.linkedin.com/in/harshitarora7
+- Website: https://harshit-arora.vercel.app/
+- Location: Faridabad, Haryana, Delhi NCR, India
+
+## Experience
+
+- **Max Healthcare** — Industrial Trainee, Marketing (Feb 2026 – May 2026).
+  Produced SEO- and AEO-optimised content using prompt engineering for diagnostic-test
+  and hospital topics. Built content and automation workflows with Claude Skills,
+  Custom GPTs and AI video production, covering generation, QA and performance analysis.
+  Supported SEO strategy execution, Google Ads fundamentals and competitive benchmarking.
+  Produced AI-assisted performance reports and backtested WhatsApp bot conversation flows.
+- **Bajrang Industrial Hardware**, Faridabad — Sales & Marketing Associate (Apr 2025 – Jul 2025).
+  Acquired and served B2B clients; coordinated wholesale hardware sales; supported brand
+  visibility and customer-retention efforts.
+- **CMR Green Technologies**, Faridabad — Finance & Taxation Intern (May 2022 – Jul 2022).
+  Reconciled Form 26AS, AIS and TIS; worked on TDS/TCS returns (26Q, 27EQ) and Form 15CA
+  for three entities; reviewed payables and supported Section 80JJA analysis.
+- **JIMS Kalkaji, Campus Media** — Social Media Manager (Feb 2021 – Jun 2023).
+  Ran official LinkedIn presence for Pixellence and Communicon; managed the institute's
+  official Twitter handle for seven months.
+
+## Skills
+
+- Digital marketing & SEO: technical SEO, GEO and AEO content, content strategy, E-E-A-T,
+  keyword research, Google Search Console.
+- AI & automation: prompt engineering, LLM content production, AI workflow design,
+  AI video production, Claude Skills, Custom GPTs, Google AI Studio.
+- Core: analytical thinking, strategy and planning, team leadership, AI-assisted automation.
+
+## Education
+
+- B.Com (Hons), JIMS Kalkaji, New Delhi — CGPA 9.3 (2023)
+- CBSE Class 12, Delhi Public School, Faridabad — 80% (2020)
+- CBSE Class 10, Delhi Public School, Faridabad — 85% (2018)
+
+## Certifications
+
+- Google AI Professional Certifications — Google (2026)
+- SEO Professional Certification by Moz — LinkedIn Learning (2026)
+- NISM Series V-A Mutual Fund Distributors — NISM (2023)
+- Zerodha Varsity Stock Market Basics — Zerodha (2022)
+- Financial Markets — Yale University (2021)
+
+## Files
+
+- [Resume (PDF)](https://harshit-arora.vercel.app/Harshit_Arora_Resume.pdf): Full two-page resume.
+- [Sitemap](https://harshit-arora.vercel.app/sitemap.xml): All indexable URLs.
