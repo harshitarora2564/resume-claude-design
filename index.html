@@ -52,7 +52,6 @@
     --body: #4A5248;
     --muted: #6B7268;
     --hairline: #DED8CA;
-    --stat-line: #CFC9BA;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -164,7 +163,6 @@
     text-wrap: balance;
   }
   .hero-sub { margin: 0; max-width: 520px; font-size: 17px; line-height: 1.65; color: var(--body); }
-  .hero-ctas { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .hero-right { display: flex; justify-content: center; }
   .portrait-frame { width: min(380px, 100%); aspect-ratio: 4 / 5; position: relative; }
   .portrait-frame img {
@@ -175,33 +173,10 @@
     display: block;
   }
 
-  /* Profile */
-  .profile-band { border-top: 1px solid var(--hairline); background: var(--cream-2); }
-  .profile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.6fr;
-    gap: 64px;
-    padding-top: 100px;
-    padding-bottom: 100px;
-  }
   .section-head { display: flex; flex-direction: column; gap: 20px; }
-  .profile-body { display: flex; flex-direction: column; gap: 36px; }
-  .profile-body > p { margin: 0; font-size: 18px; line-height: 1.7; color: #333B33; text-wrap: pretty; }
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--stat-line);
-    border: 1px solid var(--stat-line);
-    border-radius: 14px;
-    overflow: hidden;
-  }
-  .stat { background: var(--cream); padding: 26px 24px; display: flex; flex-direction: column; gap: 6px; }
-  .stat-num { font-size: 34px; font-weight: 300; letter-spacing: -0.02em; }
-  .stat-cap { font-size: 13px; color: var(--muted); line-height: 1.45; }
 
   /* Experience */
-  .experience { padding-top: 100px; padding-bottom: 60px; }
+  .experience { border-top: 1px solid var(--hairline); padding-top: 100px; padding-bottom: 60px; }
   .experience-head {
     display: flex;
     align-items: flex-end;
@@ -266,34 +241,6 @@
     padding: 7px 14px;
   }
 
-  /* Education & Certifications */
-  .education {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    padding-top: 100px;
-    padding-bottom: 100px;
-  }
-  .education h2 { font-size: clamp(28px, 2.6vw, 38px); }
-  .edu-col { display: flex; flex-direction: column; gap: 40px; }
-  .edu-rows { display: flex; flex-direction: column; }
-  .edu-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 22px 0;
-    border-top: 1px solid var(--hairline);
-  }
-  .edu-row:last-child { border-bottom: 1px solid var(--hairline); }
-  .edu-main { display: flex; flex-direction: column; gap: 4px; }
-  .edu-title { font-size: 16px; font-weight: 500; }
-  .edu-place { font-size: 14px; color: var(--muted); }
-  .edu-side { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; flex-shrink: 0; }
-  .edu-score { font-size: 14px; color: var(--green); font-weight: 500; }
-  .edu-year { font-size: 13px; color: var(--muted); }
-  .cert-name { font-size: 15px; font-weight: 500; }
-  .cert-issuer { font-size: 13px; color: var(--muted); flex-shrink: 0; }
-
   /* Contact */
   .contact-band { background: var(--ink); }
   .contact-inner { display: flex; flex-direction: column; gap: 64px; padding-top: 120px; padding-bottom: 80px; }
@@ -325,16 +272,11 @@
     .nav-inner { padding: 16px 24px; }
     .nav-links { display: none; }
     .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 64px; padding-bottom: 72px; }
-    .profile-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 64px; padding-bottom: 64px; }
     .experience { padding-top: 64px; padding-bottom: 40px; }
     .role { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
     .skills-inner { padding-top: 64px; padding-bottom: 64px; }
     .skills-grid { grid-template-columns: 1fr; }
-    .education { grid-template-columns: 1fr; gap: 56px; padding-top: 64px; padding-bottom: 64px; }
     .contact-inner { padding-top: 80px; padding-bottom: 56px; }
-  }
-  @media (max-width: 640px) {
-    .stats { grid-template-columns: 1fr; }
   }
 </style>
 
@@ -404,10 +346,8 @@
   <div class="container nav-inner">
     <a href="#top" class="wordmark">harshit<span style="color: var(--green)">.</span>arora</a>
     <div class="nav-links">
-      <a href="#about">Profile</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </div>
     <a href="Harshit_Arora_Resume.pdf" download="Harshit_Arora_Resume.pdf" class="btn btn-green btn-nav">Download Resume</a>
@@ -422,10 +362,6 @@
     </div>
     <h1>Marketing, SEO &amp; AI-driven content, grounded in how businesses <em class="accent">actually sell</em>.</h1>
     <p class="hero-sub">I’m Harshit Arora — a marketing graduate turning curiosity and structured thinking into SEO, AEO and AI-driven content for brands in Delhi NCR and beyond.</p>
-    <div class="hero-ctas">
-      <a href="mailto:aroraharshit2564@gmail.com" class="btn btn-green">Email me</a>
-      <a href="https://www.linkedin.com/in/harshitarora7" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn ↗</a>
-    </div>
   </div>
   <div class="hero-right">
     <div class="portrait-frame">
@@ -434,36 +370,10 @@
   </div>
 </header>
 
-<section id="about" class="profile-band">
-  <div class="container profile-grid">
-    <div class="section-head">
-      <span class="eyebrow">01 — Profile</span>
-      <h2>Range, <em class="accent">by design</em>.</h2>
-    </div>
-    <div class="profile-body">
-      <p>B.Com (Hons) from JIMS Kalkaji, building a career in digital marketing, content strategy and brand communication. I’ve sold B2B hardware on the ground, run social media for college societies, and shipped SEO and AI-driven content inside healthcare marketing. Different worlds — deliberately. You understand marketing better when you’ve seen how businesses actually sell, not just how they communicate.</p>
-      <div class="stats">
-        <div class="stat">
-          <span class="stat-num">9.3</span>
-          <span class="stat-cap">CGPA — B.Com (Hons), JIMS Kalkaji</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">3</span>
-          <span class="stat-cap">Industries — healthcare, B2B trade, campus media</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">5</span>
-          <span class="stat-cap">Certifications — Google AI, NISM, Moz SEO &amp; more</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="experience" class="container experience">
   <div class="experience-head">
     <div class="section-head">
-      <span class="eyebrow">02 — Experience</span>
+      <span class="eyebrow">01 — Experience</span>
       <h2>Where I’ve worked</h2>
     </div>
     <span class="experience-range">2021 — 2026</span>
@@ -531,7 +441,7 @@
 <section id="skills" class="skills-band">
   <div class="container skills-inner">
     <div class="section-head">
-      <span class="eyebrow">03 — Skills</span>
+      <span class="eyebrow">02 — Skills</span>
       <h2>What I work with</h2>
     </div>
     <div class="skills-grid">
@@ -570,79 +480,10 @@
   </div>
 </section>
 
-<section id="education" class="container education">
-  <div class="edu-col">
-    <div class="section-head">
-      <span class="eyebrow">04 — Education</span>
-      <h2>Education</h2>
-    </div>
-    <div class="edu-rows">
-      <div class="edu-row">
-        <div class="edu-main">
-          <span class="edu-title">B.Com (Hons)</span>
-          <span class="edu-place">JIMS Kalkaji, New Delhi</span>
-        </div>
-        <div class="edu-side">
-          <span class="edu-score">CGPA 9.3</span>
-          <span class="edu-year">2023</span>
-        </div>
-      </div>
-      <div class="edu-row">
-        <div class="edu-main">
-          <span class="edu-title">CBSE Class 12</span>
-          <span class="edu-place">Delhi Public School, Faridabad</span>
-        </div>
-        <div class="edu-side">
-          <span class="edu-score">80%</span>
-          <span class="edu-year">2020</span>
-        </div>
-      </div>
-      <div class="edu-row">
-        <div class="edu-main">
-          <span class="edu-title">CBSE Class 10</span>
-          <span class="edu-place">Delhi Public School, Faridabad</span>
-        </div>
-        <div class="edu-side">
-          <span class="edu-score">85%</span>
-          <span class="edu-year">2018</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="edu-col">
-    <div class="section-head">
-      <span class="eyebrow">05 — Certifications</span>
-      <h2>Certifications</h2>
-    </div>
-    <div class="edu-rows">
-      <div class="edu-row">
-        <span class="cert-name">Google AI Professional Certifications</span>
-        <span class="cert-issuer">Google · 2026</span>
-      </div>
-      <div class="edu-row">
-        <span class="cert-name">SEO Professional Certification by Moz</span>
-        <span class="cert-issuer">LinkedIn Learning · 2026</span>
-      </div>
-      <div class="edu-row">
-        <span class="cert-name">NISM Series V-A Mutual Fund Distributors</span>
-        <span class="cert-issuer">NISM · 2023</span>
-      </div>
-      <div class="edu-row">
-        <span class="cert-name">Zerodha Varsity Stock Market Basics</span>
-        <span class="cert-issuer">Zerodha · 2022</span>
-      </div>
-      <div class="edu-row">
-        <span class="cert-name">Financial Markets</span>
-        <span class="cert-issuer">Yale University · 2021</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="contact" class="contact-band">
   <div class="container contact-inner">
     <div class="contact-copy">
-      <span class="eyebrow">06 — Contact</span>
+      <span class="eyebrow">03 — Contact</span>
       <h2>Let’s build marketing that <em class="accent">actually works</em>.</h2>
       <p>Based in Faridabad, Delhi NCR. Open to marketing, SEO and AI-content roles — or just a good conversation.</p>
       <div class="contact-ctas">
