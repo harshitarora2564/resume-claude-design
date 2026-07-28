@@ -293,18 +293,46 @@
   /* Intro curtain */
   .intro {
     position: fixed; inset: 0; z-index: 200;
-    background: var(--cream);
+    background: var(--ink);
     display: grid; place-items: center;
-    transition: transform .85s var(--e-curtain);
+    transition: transform 1s var(--e-curtain);
     will-change: transform;
   }
   .intro.done { transform: translateY(-101%); }
-  .intro-word {
-    font-size: clamp(26px, 4vw, 42px); font-weight: 600; letter-spacing: .02em; color: var(--ink);
-    opacity: 0; transform: translateY(10px);
-    transition: opacity .45s ease, transform .6s var(--e);
+  .intro-inner { transition: transform 1s var(--e-curtain); }
+  .intro.done .intro-inner { transform: translateY(-28%); }
+
+  .intro-word { display: inline-block; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+  .iw {
+    display: inline-block; transform: translateY(115%);
+    font-size: clamp(30px, 5.2vw, 62px); font-weight: 600; letter-spacing: -.015em; color: var(--cream);
+    transition: transform 1.15s var(--e);
+    will-change: transform;
   }
-  .intro.show .intro-word { opacity: 1; transform: none; }
+  .intro.show .iw { transform: none; }
+  .intro.out .iw { transform: translateY(-115%); transition: transform .75s var(--e-curtain); }
+  .idot { color: var(--sage); }
+
+  .intro-meta {
+    position: absolute; left: 40px; right: 40px; bottom: 34px;
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 20px;
+    opacity: 0; transition: opacity .9s ease .25s;
+  }
+  .intro.show .intro-meta { opacity: 1; }
+  .intro.out .intro-meta { opacity: 0; transition: opacity .45s ease; }
+  .intro-label {
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--sage);
+    padding-bottom: 6px;
+  }
+  .intro-count {
+    font-size: clamp(34px, 5.5vw, 58px); font-weight: 300; letter-spacing: -.02em;
+    color: var(--cream); font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  .intro-line { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(157,181,164,.16); }
+  .intro-line i { display: block; height: 100%; background: var(--sage); transform: scaleX(0); transform-origin: 0 50%; will-change: transform; }
+
+  @media (max-width: 640px) { .intro-meta { left: 24px; right: 24px; bottom: 26px; } }
+
   html:not(.js) .intro { display: none; }
   html.intro-lock, html.intro-lock body { overflow: hidden; }
 
@@ -436,7 +464,14 @@
 </script>
 </head>
 <body>
-<div class="intro" id="intro" aria-hidden="true"><span class="intro-word">harshit<span style="color:var(--green)">.</span>arora</span></div>
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-inner"><span class="intro-word"><span class="iw">harshit<span class="idot">.</span>arora</span></span></div>
+  <div class="intro-meta">
+    <span class="intro-label">Marketing · SEO · AI Content</span>
+    <span class="intro-count" id="introCount">0</span>
+  </div>
+  <div class="intro-line"><i id="introLine"></i></div>
+</div>
 <div class="progress" aria-hidden="true"><i id="bar"></i></div>
 
 <nav class="nav">
@@ -663,11 +698,32 @@
     if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
     startHero();
   } else {
+    var LOAD = 1900;                 // counter + line duration
+    var countEl = $("#introCount");
+    var lineEl = $("#introLine");
     docEl.classList.add("intro-lock");
-    setTimeout(function () { intro.classList.add("show"); }, 40);
-    setTimeout(function () { dropCurtain(); startHero(); }, 560);
-    // failsafe: never trap the page behind the curtain
-    setTimeout(function () { dropCurtain(); startHero(); }, 2500);
+
+    setTimeout(function () {
+      intro.classList.add("show");
+
+      if (lineEl) {
+        lineEl.style.transition = "transform " + LOAD + "ms cubic-bezier(.33,0,.15,1)";
+        requestAnimationFrame(function () { lineEl.style.transform = "scaleX(1)"; });
+      }
+      if (countEl) {
+        var t0 = performance.now();
+        (function tick(now) {
+          var t = Math.min(1, (now - t0) / LOAD);
+          var eased = 1 - Math.pow(1 - t, 3);        // ease-out cubic, same feel as the line
+          countEl.textContent = Math.round(eased * 100);
+          if (t < 1) requestAnimationFrame(tick);
+        })(performance.now());
+      }
+    }, 60);
+
+    setTimeout(function () { intro.classList.add("out"); }, LOAD + 220);   // wordmark exits
+    setTimeout(function () { dropCurtain(); startHero(); }, LOAD + 620);   // curtain lifts, hero begins
+    setTimeout(function () { dropCurtain(); startHero(); }, 6000);         // failsafe
   }
 
   /* ---------- 3. scroll reveals ---------- */
