@@ -237,9 +237,35 @@
   .chip {
     font-size: 13px;
     color: var(--chip);
-    border: 1px solid var(--green-line);
+    border: none;
     border-radius: 999px;
     padding: 7px 14px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .028);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, .12);
+  }
+  /* gradient hairline drawn as a masked ring — brighter top and bottom, like glass */
+  .chip::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.2px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,.42) 0%, rgba(255,255,255,.14) 20%,
+      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+      rgba(255,255,255,.14) 80%, rgba(255,255,255,.42) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  html.js .chip { transform: translateY(16px); }
+  html.js .skill-col.in .chip {
+    transform: none;
+    transition: transform .7s var(--e);
+    transition-delay: var(--dc, 0ms);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html.js .chip { transform: none !important; }
+    html.js [data-r], html.js .hero-tags, html.js .hero-sub, html.js .hero-right { filter: none !important; }
   }
 
   /* Contact */
@@ -345,7 +371,11 @@
   html:not(.js) .progress { display: none; }
 
   /* Headline word reveal */
-  .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .1em; margin-bottom: -.1em; }
+  .w {
+    display: inline-block; overflow: hidden; vertical-align: bottom;
+    padding: 0 .12em .12em;      /* room for italic overhang + descenders */
+    margin: 0 -.12em -.12em;     /* cancelled so spacing is untouched */
+  }
   html.js .word { display: inline-block; transform: translateY(112%); will-change: transform; }
   html.js .word.in { transform: none; transition: transform .95s var(--e); transition-delay: var(--d, 0ms); }
 
@@ -353,17 +383,17 @@
   html.js [data-r] { opacity: 0; transform: translateY(26px); }
   html.js [data-r].in {
     opacity: 1; transform: none;
-    transition: opacity .8s var(--e), transform .8s var(--e);
+    transition: opacity .85s var(--e), transform .85s var(--e);
     transition-delay: var(--d, 0ms);
   }
 
   /* Hero entrance */
   html.js .nav { opacity: 0; }
   html.js .nav.in { opacity: 1; transition: opacity .8s ease; }
-  html.js .hero-tags, html.js .hero-sub, html.js .hero-right { opacity: 0; transform: translateY(20px); }
+  html.js .hero-tags, html.js .hero-sub, html.js .hero-right { opacity: 0; transform: translateY(20px); filter: blur(8px); }
   html.js .hero-tags.in, html.js .hero-sub.in, html.js .hero-right.in {
-    opacity: 1; transform: none;
-    transition: opacity .9s var(--e), transform .9s var(--e);
+    opacity: 1; transform: none; filter: blur(0);
+    transition: opacity .95s var(--e), transform .95s var(--e), filter .95s var(--e);
     transition-delay: var(--d, 0ms);
   }
 
@@ -822,20 +852,27 @@
       var vh = window.innerHeight, rects = [];
       for (var i = 0; i < litEls.length; i++) rects.push(litEls[i].getBoundingClientRect()); // read
       for (var j = 0; j < litEls.length; j++) {                                              // then write
-        var rc = rects[j];
-        // starts as the element enters at 95% of the viewport, completes once its
-        // top reaches 60% — so blocks near the end of the document still finish
+        var rc = rects[j], el = litEls[j], full = el.__chars + 6;
         var prog = (vh * 0.95 - rc.top) / (vh * 0.35);
+        // if the block sits entirely inside the viewport it is fully read: finish it.
+        // this covers blocks near the end of the document that never scroll higher.
+        if (rc.top >= 0 && rc.bottom <= vh) prog = 1;
         prog = prog < 0 ? 0 : prog > 1 ? 1 : prog;
-        var v = Math.round(prog * (litEls[j].__chars + 6));
-        if (v !== litEls[j].__lit) {            // only touch the DOM when it changes
-          litEls[j].__lit = v;
-          litEls[j].style.setProperty("--lit", v);
+        var v = Math.round(prog * full);
+        if (v >= full - 1) el.__done = true;    // latch: never dim again once complete
+        if (el.__done) v = full;
+        if (v !== el.__lit) {                   // only touch the DOM when it changes
+          el.__lit = v;
+          el.style.setProperty("--lit", v);
         }
       }
     }
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+  $$(".skill-col").forEach(function (col) {
+    $$(".chip", col).forEach(function (c, i) { c.style.setProperty("--dc", (140 + i * 55) + "ms"); });
+  });
 
   /* ---------- 5. scroll-lit text ---------- */
   litEls = $$(".experience-head h2, .skills-inner h2, .contact-copy p");
