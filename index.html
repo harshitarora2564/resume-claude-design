@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.className+=' js';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Harshit Arora — Marketing, SEO &amp; AI Content Specialist | Delhi NCR</title>
 <meta name="description" content="Harshit Arora is a marketing graduate specialising in technical SEO, GEO/AEO content and AI-driven content workflows, based in Delhi NCR. B.Com (Hons), CGPA 9.3. Open to marketing roles.">
@@ -278,6 +279,100 @@
     .skills-grid { grid-template-columns: 1fr; }
     .contact-inner { padding-top: 80px; padding-bottom: 56px; }
   }
+
+  /* ============================================================
+     MOTION SYSTEM
+     Only opacity + transform are animated (compositor-only, no
+     layout work per frame). Every hidden state is scoped to
+     html.js, so with JS disabled the page renders fully visible.
+     ============================================================ */
+  :root { --e: cubic-bezier(.22,1,.36,1); --e-curtain: cubic-bezier(.76,0,.24,1); }
+
+  section[id], header[id] { scroll-margin-top: 88px; }
+
+  /* Intro curtain */
+  .intro {
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--cream);
+    display: grid; place-items: center;
+    transition: transform .85s var(--e-curtain);
+    will-change: transform;
+  }
+  .intro.done { transform: translateY(-101%); }
+  .intro-word {
+    font-size: clamp(26px, 4vw, 42px); font-weight: 600; letter-spacing: .02em; color: var(--ink);
+    opacity: 0; transform: translateY(10px);
+    transition: opacity .45s ease, transform .6s var(--e);
+  }
+  .intro.show .intro-word { opacity: 1; transform: none; }
+  html:not(.js) .intro { display: none; }
+  html.intro-lock, html.intro-lock body { overflow: hidden; }
+
+  /* Scroll progress */
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 150; pointer-events: none; }
+  .progress i {
+    display: block; height: 100%; background: var(--green);
+    transform: scaleX(0); transform-origin: 0 50%; will-change: transform;
+  }
+  html:not(.js) .progress { display: none; }
+
+  /* Headline word reveal */
+  .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .1em; margin-bottom: -.1em; }
+  html.js .word { display: inline-block; transform: translateY(112%); will-change: transform; }
+  html.js .word.in { transform: none; transition: transform .95s var(--e); transition-delay: var(--d, 0ms); }
+
+  /* Generic scroll reveal */
+  html.js [data-r] { opacity: 0; transform: translateY(26px); }
+  html.js [data-r].in {
+    opacity: 1; transform: none;
+    transition: opacity .8s var(--e), transform .8s var(--e);
+    transition-delay: var(--d, 0ms);
+  }
+
+  /* Hero entrance */
+  html.js .nav { opacity: 0; }
+  html.js .nav.in { opacity: 1; transition: opacity .8s ease; }
+  html.js .hero-tags, html.js .hero-sub, html.js .hero-right { opacity: 0; transform: translateY(20px); }
+  html.js .hero-tags.in, html.js .hero-sub.in, html.js .hero-right.in {
+    opacity: 1; transform: none;
+    transition: opacity .9s var(--e), transform .9s var(--e);
+    transition-delay: var(--d, 0ms);
+  }
+
+  /* Portrait parallax: frame clips, image moves inside it */
+  .portrait-frame { clip-path: inset(0 round 220px 220px 20px 20px); overflow: hidden; }
+  .portrait-frame img { clip-path: none; transform: scale(1.08); will-change: transform; }
+
+  /* Nav settle on scroll */
+  .nav { transition: box-shadow .4s ease, background .4s ease; }
+  .nav.scrolled { box-shadow: 0 1px 24px rgba(23,32,27,.06); }
+  .nav-links a { position: relative; }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; bottom: -5px; width: 100%; height: 1px;
+    background: var(--green); transform: scaleX(0); transform-origin: 100% 50%;
+    transition: transform .45s var(--e);
+  }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: 0 50%; }
+
+  /* Hover micro-interactions */
+  .btn { will-change: transform; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  .role-detail h3, .role-org-name { transition: transform .45s var(--e), color .3s ease; }
+  .role:hover .role-detail h3 { transform: translateX(8px); }
+  .role:hover .role-org-name { color: var(--ink); }
+  .chip { transition: transform .35s var(--e), border-color .35s ease, color .35s ease; }
+  .chip:hover { transform: translateY(-3px); border-color: var(--sage); color: var(--cream); }
+
+  /* Respect reduced-motion: no transforms, no curtain, everything visible */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .intro { display: none !important; }
+    html.js [data-r], html.js .hero-tags, html.js .hero-sub, html.js .hero-right,
+    html.js .word, html.js .nav { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .portrait-frame img { transform: none !important; }
+    .btn:hover, .role:hover .role-detail h3, .chip:hover { transform: none !important; }
+  }
 </style>
 
 <script type="application/ld+json">
@@ -341,6 +436,8 @@
 </script>
 </head>
 <body>
+<div class="intro" id="intro" aria-hidden="true"><span class="intro-word">harshit<span style="color:var(--green)">.</span>arora</span></div>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
 
 <nav class="nav">
   <div class="container nav-inner">
@@ -373,7 +470,7 @@
 </header>
 
 <section id="experience" class="container experience">
-  <div class="experience-head">
+  <div class="experience-head" data-r>
     <div class="section-head">
       <span class="eyebrow">01 — Experience</span>
       <h2>Where I’ve worked</h2>
@@ -381,7 +478,7 @@
     <span class="experience-range">2021 — 2026</span>
   </div>
 
-  <div class="role">
+  <div class="role" data-r>
     <div class="role-org">
       <span class="role-org-name">Max Healthcare</span>
       <span class="role-dates">Feb 2026 — May 2026</span>
@@ -397,7 +494,7 @@
     </div>
   </div>
 
-  <div class="role">
+  <div class="role" data-r>
     <div class="role-org">
       <span class="role-org-name">Bajrang Industrial Hardware</span>
       <span class="role-dates">Apr 2025 — Jul 2025 · Faridabad</span>
@@ -411,7 +508,7 @@
     </div>
   </div>
 
-  <div class="role">
+  <div class="role" data-r>
     <div class="role-org">
       <span class="role-org-name">CMR Green Technologies</span>
       <span class="role-dates">May 2022 — Jul 2022 · Faridabad</span>
@@ -425,7 +522,7 @@
     </div>
   </div>
 
-  <div class="role">
+  <div class="role" data-r>
     <div class="role-org">
       <span class="role-org-name">JIMS Kalkaji — Campus Media</span>
       <span class="role-dates">Feb 2021 — Jun 2023</span>
@@ -442,12 +539,12 @@
 
 <section id="skills" class="skills-band">
   <div class="container skills-inner">
-    <div class="section-head">
+    <div class="section-head" data-r>
       <span class="eyebrow">02 — Skills</span>
       <h2>What I work with</h2>
     </div>
     <div class="skills-grid">
-      <div class="skill-col">
+      <div class="skill-col" data-r>
         <h3>Digital Marketing &amp; SEO</h3>
         <div class="chips">
           <span class="chip">Technical SEO</span>
@@ -458,7 +555,7 @@
           <span class="chip">Search Console</span>
         </div>
       </div>
-      <div class="skill-col">
+      <div class="skill-col" data-r>
         <h3>AI &amp; Automation</h3>
         <div class="chips">
           <span class="chip">Prompt Engineering</span>
@@ -469,7 +566,7 @@
           <span class="chip">Google AI Studio</span>
         </div>
       </div>
-      <div class="skill-col">
+      <div class="skill-col" data-r>
         <h3>Core Competencies</h3>
         <div class="chips">
           <span class="chip">Analytical Thinking</span>
@@ -484,7 +581,7 @@
 
 <section id="contact" class="contact-band">
   <div class="container contact-inner">
-    <div class="contact-copy">
+    <div class="contact-copy" data-r>
       <span class="eyebrow">03 — Contact</span>
       <h2>Let’s build marketing that <em class="accent">actually works</em>.</h2>
       <p>Based in Faridabad, Delhi NCR. Open to marketing, SEO and AI-content roles — or just a good conversation.</p>
@@ -494,12 +591,143 @@
         <a href="Harshit_Arora_Resume.pdf" download="Harshit_Arora_Resume.pdf" class="btn btn-outline-dark">Resume (PDF)</a>
       </div>
     </div>
-    <div class="footer">
+    <div class="footer" data-r>
       <span>© 2026 Harshit Arora</span>
       <span>Marketing · SEO · AI Content — Delhi NCR</span>
     </div>
   </div>
 </section>
 
+
+<script>
+(function () {
+  "use strict";
+  var docEl = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var EASE_STEP = 38;   // ms between staggered items
+
+  /* ---------- helpers ---------- */
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+  function stagger(list, base) {
+    list.forEach(function (el, i) { el.style.setProperty("--d", (base + i * EASE_STEP) + "ms"); });
+  }
+  function show(el) { if (el) el.classList.add("in"); }
+
+  /* ---------- 1. split the headline into masked words ---------- */
+  var words = [];
+  var h1 = $(".hero-left h1");
+  if (h1 && !reduce) {
+    var textNodes = [], walker = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT, null, false);
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    textNodes.forEach(function (node) {
+      var frag = document.createDocumentFragment();
+      node.nodeValue.split(/(\s+)/).forEach(function (part) {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        var mask = document.createElement("span"); mask.className = "w";
+        var word = document.createElement("span"); word.className = "word"; word.textContent = part;
+        mask.appendChild(word); frag.appendChild(mask);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+    words = $$(".word", h1);
+    stagger(words, 0);
+  }
+
+  /* ---------- 2. intro curtain, then hero entrance ---------- */
+  var intro = $("#intro");
+  var heroBits = [$(".hero-tags"), $(".hero-sub"), $(".hero-right")].filter(Boolean);
+  var nav = $(".nav");
+  var heroStarted = false;
+
+  function startHero() {
+    if (heroStarted) return;
+    heroStarted = true;
+    show(nav);
+    words.forEach(show);
+    heroBits.forEach(function (el, i) {
+      el.style.setProperty("--d", (260 + i * 110) + "ms");
+      show(el);
+    });
+  }
+
+  function dropCurtain() {
+    if (!intro) return;
+    docEl.classList.remove("intro-lock");
+    intro.classList.add("done");
+    setTimeout(function () { if (intro && intro.parentNode) intro.parentNode.removeChild(intro); }, 1000);
+  }
+
+  if (reduce || !intro) {
+    if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
+    startHero();
+  } else {
+    docEl.classList.add("intro-lock");
+    setTimeout(function () { intro.classList.add("show"); }, 40);
+    setTimeout(function () { dropCurtain(); startHero(); }, 560);
+    // failsafe: never trap the page behind the curtain
+    setTimeout(function () { dropCurtain(); startHero(); }, 2500);
+  }
+
+  /* ---------- 3. scroll reveals ---------- */
+  var targets = $$("[data-r]");
+  // stagger siblings within their own group so rows cascade
+  [".skills-grid", ".experience"].forEach(function (sel) {
+    var group = $(sel);
+    if (group) stagger($$("[data-r]", group), 0);
+  });
+
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach(show);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { show(entry.target); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+    targets.forEach(function (el) { io.observe(el); });
+    // anything already in view on load reveals immediately
+    setTimeout(function () {
+      targets.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.9) show(el);
+      });
+    }, 600);
+  }
+
+  /* ---------- 4. one rAF loop for progress bar, nav state, parallax ---------- */
+  var bar = $("#bar");
+  var frame = $(".portrait-frame");
+  var portrait = frame ? $("img", frame) : null;
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    var y = window.pageYOffset || docEl.scrollTop;
+
+    if (nav) nav.classList.toggle("scrolled", y > 8);
+
+    if (bar) {
+      var max = docEl.scrollHeight - window.innerHeight;
+      bar.style.transform = "scaleX(" + (max > 0 ? Math.min(1, y / max) : 0) + ")";
+    }
+
+    if (portrait && !reduce) {
+      var r = frame.getBoundingClientRect();
+      if (r.bottom > -200 && r.top < window.innerHeight + 200) {
+        var p = (window.innerHeight - r.top) / (window.innerHeight + r.height); // 0..1
+        p = p < 0 ? 0 : p > 1 ? 1 : p;
+        portrait.style.transform = "translate3d(0," + ((p - 0.5) * -34).toFixed(2) + "px,0) scale(1.08)";
+      }
+    }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  update();
+})();
+</script>
 </body>
 </html>
